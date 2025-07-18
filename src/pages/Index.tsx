@@ -15,7 +15,7 @@ export default function Index() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Icon name="Wrench" className="h-8 w-8 text-blue-600" />
-              <span className="text-2xl font-bold text-gray-900">АвтоСервис</span>
+              <span className="text-2xl font-bold text-gray-900">ГРМ - Гаражная Ремонтная Мастерская</span>
             </div>
             <nav className="hidden md:flex space-x-8">
               <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">Автомобили</a>
@@ -214,7 +214,7 @@ export default function Index() {
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <Icon name="Wrench" className="h-6 w-6 text-blue-400" />
-                <span className="text-xl font-bold">АвтоСервис</span>
+                <span className="text-xl font-bold">ГРМ - Гаражная Ремонтная Мастерская</span>
               </div>
               <p className="text-gray-400">
                 Профессиональный автосервис с 15-летним опытом работы
@@ -247,7 +247,7 @@ export default function Index() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 АвтоСервис. Все права защищены.</p>
+            <p>&copy; 2024 ГРМ - Гаражная Ремонтная Мастерская. Все права защищены.</p>
           </div>
         </div>
       </footer>
