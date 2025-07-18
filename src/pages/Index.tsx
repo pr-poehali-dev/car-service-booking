@@ -234,7 +234,7 @@ export default function Index() {
               <ul className="space-y-2 text-gray-400">
                 <li>+7 (495) 123-45-67</li>
                 <li>info@autoservice.ru</li>
-                <li>г. Москва, ул. Примерная, 1</li>
+                <li>г. Воронеж, ул. Кривошеина, 9Е</li>
               </ul>
             </div>
             <div>
