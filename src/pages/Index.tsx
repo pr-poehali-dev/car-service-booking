@@ -63,7 +63,7 @@ export default function Index() {
             <p className="text-xl text-gray-600">Полный спектр услуг для вашего автомобиля</p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 p-4 bg-blue-50 rounded-full w-16 h-16 flex items-center justify-center">
@@ -74,6 +74,20 @@ export default function Index() {
               <CardContent>
                 <CardDescription className="text-center">
                   Плановое ТО, замена масла, фильтров, диагностика систем
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors">
+              <CardHeader className="text-center">
+                <div className="mx-auto mb-4 p-4 bg-purple-50 rounded-full w-16 h-16 flex items-center justify-center">
+                  <Icon name="Gauge" className="h-8 w-8 text-purple-600" />
+                </div>
+                <CardTitle className="text-xl">Диагностика</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-center">
+                  Компьютерная диагностика, проверка систем, выявление неисправностей
                 </CardDescription>
               </CardContent>
             </Card>
@@ -95,27 +109,41 @@ export default function Index() {
             <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 p-4 bg-green-50 rounded-full w-16 h-16 flex items-center justify-center">
-                  <Icon name="Zap" className="h-8 w-8 text-green-600" />
+                  <Icon name="Cog" className="h-8 w-8 text-green-600" />
                 </div>
-                <CardTitle className="text-xl">Электрика</CardTitle>
+                <CardTitle className="text-xl">Ремонт трансмиссии</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-center">
-                  Диагностика и ремонт электрических систем, АКБ, генераторы
+                  Ремонт КПП, сцепления, приводов, замена масла
                 </CardDescription>
               </CardContent>
             </Card>
 
             <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors">
               <CardHeader className="text-center">
-                <div className="mx-auto mb-4 p-4 bg-purple-50 rounded-full w-16 h-16 flex items-center justify-center">
-                  <Icon name="Gauge" className="h-8 w-8 text-purple-600" />
+                <div className="mx-auto mb-4 p-4 bg-yellow-50 rounded-full w-16 h-16 flex items-center justify-center">
+                  <Icon name="Wrench" className="h-8 w-8 text-yellow-600" />
                 </div>
-                <CardTitle className="text-xl">Диагностика</CardTitle>
+                <CardTitle className="text-xl">Ремонт ходовой</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-center">
-                  Компьютерная диагностика, проверка систем, выявление неисправностей
+                  Амортизаторы, стойки, пружины, рычаги, рулевое управление
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors">
+              <CardHeader className="text-center">
+                <div className="mx-auto mb-4 p-4 bg-orange-50 rounded-full w-16 h-16 flex items-center justify-center">
+                  <Icon name="CircleDot" className="h-8 w-8 text-orange-600" />
+                </div>
+                <CardTitle className="text-xl">Шиномонтаж</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-center">
+                  Замена шин, балансировка, ремонт проколов, хранение колес
                 </CardDescription>
               </CardContent>
             </Card>
@@ -161,9 +189,11 @@ export default function Index() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="maintenance">Техобслуживание</SelectItem>
-                      <SelectItem value="engine">Ремонт двигателя</SelectItem>
-                      <SelectItem value="electrical">Электрика</SelectItem>
                       <SelectItem value="diagnostics">Диагностика</SelectItem>
+                      <SelectItem value="engine">Ремонт двигателя</SelectItem>
+                      <SelectItem value="transmission">Ремонт трансмиссии</SelectItem>
+                      <SelectItem value="suspension">Ремонт ходовой</SelectItem>
+                      <SelectItem value="tires">Шиномонтаж</SelectItem>
                       <SelectItem value="other">Другое</SelectItem>
                     </SelectContent>
                   </Select>
@@ -224,9 +254,11 @@ export default function Index() {
               <h3 className="text-lg font-semibold mb-4">Услуги</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>Техобслуживание</li>
-                <li>Ремонт двигателя</li>
-                <li>Электрика</li>
                 <li>Диагностика</li>
+                <li>Ремонт двигателя</li>
+                <li>Ремонт трансмиссии</li>
+                <li>Ремонт ходовой</li>
+                <li>Шиномонтаж</li>
               </ul>
             </div>
             <div>
