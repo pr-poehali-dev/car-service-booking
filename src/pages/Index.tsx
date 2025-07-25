@@ -12,25 +12,23 @@ export default function Index() {
   const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
   const [appointmentData, setAppointmentData] = useState({
     date: '',
-    time: '',
+    hour: '',
+    minute: '',
     service: '',
     name: '',
     phone: '',
     description: ''
   });
 
-  const generateTimeSlots = () => {
-    const slots = [];
-    for (let hour = 9; hour <= 17; hour++) {
-      for (let minute = 0; minute < 60; minute += 5) {
-        const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-        slots.push(timeString);
-      }
-    }
-    return slots;
-  };
+  const hours = Array.from({ length: 9 }, (_, i) => {
+    const hour = i + 9;
+    return { value: hour.toString().padStart(2, '0'), label: `${hour}:00` };
+  });
 
-  const timeSlots = generateTimeSlots();
+  const minutes = Array.from({ length: 12 }, (_, i) => {
+    const minute = i * 5;
+    return { value: minute.toString().padStart(2, '0'), label: `:${minute.toString().padStart(2, '0')}` };
+  });
 
   const handleServiceClick = (serviceValue: string) => {
     setAppointmentData({...appointmentData, service: serviceValue});
@@ -44,7 +42,8 @@ export default function Index() {
     setIsAppointmentOpen(false);
     setAppointmentData({
       date: '',
-      time: '',
+      hour: '',
+      minute: '',
       service: '',
       name: '',
       phone: '',
@@ -120,27 +119,41 @@ export default function Index() {
                     </Select>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="date">Дата</Label>
+                    <Input
+                      id="date"
+                      type="date"
+                      value={appointmentData.date}
+                      onChange={(e) => setAppointmentData({...appointmentData, date: e.target.value})}
+                      min={new Date().toISOString().split('T')[0]}
+                      required
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="date">Дата</Label>
-                      <Input
-                        id="date"
-                        type="date"
-                        value={appointmentData.date}
-                        onChange={(e) => setAppointmentData({...appointmentData, date: e.target.value})}
-                        min={new Date().toISOString().split('T')[0]}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="time">Время</Label>
-                      <Select value={appointmentData.time} onValueChange={(value) => setAppointmentData({...appointmentData, time: value})}>
+                      <Label htmlFor="hour">Час</Label>
+                      <Select value={appointmentData.hour} onValueChange={(value) => setAppointmentData({...appointmentData, hour: value})}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Выберите время" />
+                          <SelectValue placeholder="Час" />
                         </SelectTrigger>
                         <SelectContent>
-                          {timeSlots.map((time) => (
-                            <SelectItem key={time} value={time}>{time}</SelectItem>
+                          {hours.map((hour) => (
+                            <SelectItem key={hour.value} value={hour.value}>{hour.value}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="minute">Минуты</Label>
+                      <Select value={appointmentData.minute} onValueChange={(value) => setAppointmentData({...appointmentData, minute: value})}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Минуты" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {minutes.map((minute) => (
+                            <SelectItem key={minute.value} value={minute.value}>{minute.value}</SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
