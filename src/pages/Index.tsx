@@ -32,6 +32,11 @@ export default function Index() {
 
   const timeSlots = generateTimeSlots();
 
+  const handleServiceClick = (serviceValue: string) => {
+    setAppointmentData({...appointmentData, service: serviceValue});
+    setIsAppointmentOpen(true);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Запись создана:', appointmentData);
@@ -206,7 +211,7 @@ export default function Index() {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors">
+            <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors cursor-pointer" onClick={() => handleServiceClick('maintenance')}>
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 p-4 bg-blue-50 rounded-full w-16 h-16 flex items-center justify-center">
                   <Icon name="Car" className="h-8 w-8 text-blue-600" />
@@ -220,7 +225,7 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors">
+            <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors cursor-pointer" onClick={() => handleServiceClick('diagnostics')}>
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 p-4 bg-purple-50 rounded-full w-16 h-16 flex items-center justify-center">
                   <Icon name="Gauge" className="h-8 w-8 text-purple-600" />
@@ -234,7 +239,7 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors">
+            <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors cursor-pointer" onClick={() => handleServiceClick('engine')}>
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 p-4 bg-red-50 rounded-full w-16 h-16 flex items-center justify-center">
                   <Icon name="Settings" className="h-8 w-8 text-red-600" />
@@ -248,7 +253,7 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors">
+            <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors cursor-pointer" onClick={() => handleServiceClick('transmission')}>
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 p-4 bg-green-50 rounded-full w-16 h-16 flex items-center justify-center">
                   <Icon name="Cog" className="h-8 w-8 text-green-600" />
@@ -262,7 +267,7 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors">
+            <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors cursor-pointer" onClick={() => handleServiceClick('suspension')}>
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 p-4 bg-yellow-50 rounded-full w-16 h-16 flex items-center justify-center">
                   <Icon name="Wrench" className="h-8 w-8 text-yellow-600" />
@@ -276,7 +281,7 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors">
+            <Card className="border-2 border-gray-100 hover:border-blue-200 transition-colors cursor-pointer" onClick={() => handleServiceClick('tires')}>
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 p-4 bg-orange-50 rounded-full w-16 h-16 flex items-center justify-center">
                   <Icon name="CircleDot" className="h-8 w-8 text-orange-600" />
