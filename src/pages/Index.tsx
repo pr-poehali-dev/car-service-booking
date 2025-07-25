@@ -1,12 +1,43 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import Icon from "@/components/ui/icon";
 
 export default function Index() {
+  const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
+  const [appointmentData, setAppointmentData] = useState({
+    date: '',
+    time: '',
+    service: '',
+    name: '',
+    phone: '',
+    description: ''
+  });
+
+  const timeSlots = [
+    '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
+  ];
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Запись создана:', appointmentData);
+    alert('Запись успешно создана! Мы свяжемся с вами для подтверждения.');
+    setIsAppointmentOpen(false);
+    setAppointmentData({
+      date: '',
+      time: '',
+      service: '',
+      name: '',
+      phone: '',
+      description: ''
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -23,9 +54,107 @@ export default function Index() {
               <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">Работы</a>
               <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">Запчасти</a>
             </nav>
-            <Button className="bg-blue-600 hover:bg-blue-700">
-              Записаться
-            </Button>
+            <Dialog open={isAppointmentOpen} onOpenChange={setIsAppointmentOpen}>
+              <DialogTrigger asChild>
+                <Button className="bg-blue-600 hover:bg-blue-700">
+                  Записаться
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-xl font-bold text-center">Записаться на услугу</DialogTitle>
+                </DialogHeader>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="name">Имя</Label>
+                      <Input
+                        id="name"
+                        value={appointmentData.name}
+                        onChange={(e) => setAppointmentData({...appointmentData, name: e.target.value})}
+                        placeholder="Ваше имя"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="phone">Телефон</Label>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        value={appointmentData.phone}
+                        onChange={(e) => setAppointmentData({...appointmentData, phone: e.target.value})}
+                        placeholder="+7 (XXX) XXX-XX-XX"
+                        required
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="service">Тип услуги</Label>
+                    <Select value={appointmentData.service} onValueChange={(value) => setAppointmentData({...appointmentData, service: value})}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Выберите услугу" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="maintenance">Техобслуживание</SelectItem>
+                        <SelectItem value="diagnostics">Диагностика</SelectItem>
+                        <SelectItem value="engine">Ремонт двигателя</SelectItem>
+                        <SelectItem value="transmission">Ремонт трансмиссии</SelectItem>
+                        <SelectItem value="suspension">Ремонт ходовой</SelectItem>
+                        <SelectItem value="tires">Шиномонтаж</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="date">Дата</Label>
+                      <Input
+                        id="date"
+                        type="date"
+                        value={appointmentData.date}
+                        onChange={(e) => setAppointmentData({...appointmentData, date: e.target.value})}
+                        min={new Date().toISOString().split('T')[0]}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="time">Время</Label>
+                      <Select value={appointmentData.time} onValueChange={(value) => setAppointmentData({...appointmentData, time: value})}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Выберите время" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {timeSlots.map((time) => (
+                            <SelectItem key={time} value={time}>{time}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="description">Описание работ или комментарии</Label>
+                    <Textarea
+                      id="description"
+                      value={appointmentData.description}
+                      onChange={(e) => setAppointmentData({...appointmentData, description: e.target.value})}
+                      placeholder="Опишите проблему или укажите необходимые работы..."
+                      rows={3}
+                    />
+                  </div>
+
+                  <div className="flex gap-3 pt-4">
+                    <Button type="button" variant="outline" className="flex-1" onClick={() => setIsAppointmentOpen(false)}>
+                      Отмена
+                    </Button>
+                    <Button type="submit" className="flex-1 bg-blue-600 hover:bg-blue-700">
+                      Записаться
+                    </Button>
+                  </div>
+                </form>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </header>
@@ -42,10 +171,14 @@ export default function Index() {
               Опытные мастера, современное оборудование, гарантия результата.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
-                <Icon name="Calendar" className="mr-2 h-5 w-5" />
-                Записаться онлайн
-              </Button>
+              <Dialog open={isAppointmentOpen} onOpenChange={setIsAppointmentOpen}>
+                <DialogTrigger asChild>
+                  <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+                    <Icon name="Calendar" className="mr-2 h-5 w-5" />
+                    Записаться онлайн
+                  </Button>
+                </DialogTrigger>
+              </Dialog>
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
                 <Icon name="Phone" className="mr-2 h-5 w-5" />
                 Позвонить
