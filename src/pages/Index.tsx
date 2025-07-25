@@ -119,44 +119,43 @@ export default function Index() {
                     </Select>
                   </div>
 
-                  <div>
-                    <Label htmlFor="date">Дата</Label>
-                    <Input
-                      id="date"
-                      type="date"
-                      value={appointmentData.date}
-                      onChange={(e) => setAppointmentData({...appointmentData, date: e.target.value})}
-                      min={new Date().toISOString().split('T')[0]}
-                      required
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="hour">Час</Label>
-                      <Select value={appointmentData.hour} onValueChange={(value) => setAppointmentData({...appointmentData, hour: value})}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Час" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {hours.map((hour) => (
-                            <SelectItem key={hour.value} value={hour.value}>{hour.value}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <Label htmlFor="date">Дата</Label>
+                      <Input
+                        id="date"
+                        type="date"
+                        value={appointmentData.date}
+                        onChange={(e) => setAppointmentData({...appointmentData, date: e.target.value})}
+                        min={new Date().toISOString().split('T')[0]}
+                        required
+                      />
                     </div>
+
                     <div>
-                      <Label htmlFor="minute">Минуты</Label>
-                      <Select value={appointmentData.minute} onValueChange={(value) => setAppointmentData({...appointmentData, minute: value})}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Минуты" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {minutes.map((minute) => (
-                            <SelectItem key={minute.value} value={minute.value}>{minute.value}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <Label className="text-sm font-medium">Время</Label>
+                      <div className="grid grid-cols-2 gap-2">
+                        <Select value={appointmentData.hour} onValueChange={(value) => setAppointmentData({...appointmentData, hour: value})}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Час" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {hours.map((hour) => (
+                              <SelectItem key={hour.value} value={hour.value}>{hour.value}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <Select value={appointmentData.minute} onValueChange={(value) => setAppointmentData({...appointmentData, minute: value})}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Мин" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {minutes.map((minute) => (
+                              <SelectItem key={minute.value} value={minute.value}>{minute.value}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
                   </div>
 
